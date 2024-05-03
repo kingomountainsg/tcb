@@ -1,0 +1,17 @@
+- name: Install and start nginx
+  hosts: all
+  become: yes
+  tasks:
+    - name: Installing nginx
+      yum: 
+        update_cache: yes
+        name: nginx
+        state: latest
+        
+    - name: Starting nginx
+      shell: systemctl start nginx
+      
+    - name: Enable the nginx service during the boot process
+      service:
+        name: nginx
+        enabled: yes
